@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react'
-import { Badge, Box, Button, Container, Heading, HStack, Input, Select, SimpleGrid, Stack, Text, VStack } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Badge, Box, Button, Container, Heading, HStack, Input, SimpleGrid, Stack, Text, VStack } from '@chakra-ui/react'
 
 interface OrderItem {
   id: string

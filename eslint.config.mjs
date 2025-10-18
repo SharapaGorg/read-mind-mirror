@@ -26,9 +26,9 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
-    plugins: {
-      '@stylistic': stylistic,
-    },
+    // plugins: {
+    //   '@stylistic': stylistic,
+    // },
     rules: {
       'no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
@@ -51,7 +51,7 @@ export default [
         },
       ],
       semi: ['error', 'never'],
-      '@stylistic/indent': ['error', 2],
+      // '@stylistic/indent': ['error', 2],
     },
   },
 ]
