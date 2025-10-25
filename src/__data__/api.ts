@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { analyticsService } from '../service/analytics'
 
 interface GenerateImageResponse {
   uuid: string
@@ -19,7 +20,22 @@ export const api = createApi({
         body,
       }),
     }),
+    getAnalytics: builder.query({
+      queryFn: () => {
+        return analyticsService.getAnalytics().then(res => {
+          return {
+            data: res,
+            error: undefined
+          }
+        }).catch(res => {
+          return {
+            data: undefined,
+            error: res
+          }
+        })
+      }
+    })
   }),
 })
 
-export const { useGenerateImageMutation } = api
+export const { useGenerateImageMutation, useGetAnalyticsQuery } = api

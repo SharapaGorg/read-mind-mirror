@@ -9,11 +9,20 @@ const path = require('node:path')
 
 const { getModel, gigachat } = require('./llm')
 
+const authRouter = require('./auth')
+const booksRouter = require('./books')
+const analyticsRouter = require('./analytics')
+
+
 const router = Router()
 
 const timer = (time = 300) => (req, res, next) => setTimeout(next, time);
 
 router.use(timer());
+router.use('/analytics', analyticsRouter)
+router.use('/auth', authRouter)
+router.use('/books', booksRouter)
+
 
 const slideDataSchema = z.object({
     title: z.string().describe("Название товара"),

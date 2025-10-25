@@ -1,19 +1,33 @@
-import React, { useMemo } from 'react'
-import { Box, Container, Heading, SimpleGrid, Stat, StatHelpText, StatLabel, StatNumber } from '@chakra-ui/react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Box, Container, Heading, SimpleGrid, Stat, StatHelpText, StatLabel, StatNumber, Alert, AlertIcon } from '@chakra-ui/react'
+import axios from 'axios'
+import { AnalyticsData } from '../service/analytics/types'
+import { analyticsService } from '../service/analytics'
+import Loader from '../components/loader'
+import { useGetAnalyticsQuery } from '../__data__/api'
 
 const AnalyticsPage = () => {
-  const kpis = useMemo(() => ([
-    { label: 'Лиды', value: 128, help: '+14% за 7д' },
-    { label: 'Заказы', value: 42, help: '+8% за 7д' },
-    { label: 'Средний чек', value: '2.3 млн ₽', help: '+3% за 7д' },
-    { label: 'Конверсия', value: '6.5%', help: '+0.4 п.п.' },
-  ]), [])
+  const {
+    error, data, isLoading
+  } = useGetAnalyticsQuery(undefined, {
+  })
+  
+  if (isLoading) {
+    return <Loader/>
+  }
+
+  if (error) {
+    return <Alert status='error'>
+    <AlertIcon />
+    There was an error processing your request
+  </Alert>
+  }
 
   return (
     <Container maxW="container.xl" py={8}>
       <Heading size="lg" mb={6}>Аналитика</Heading>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={4}>
-        {kpis.map((k, i) => (
+        {data.map((k, i) => (
           <Box key={i} borderWidth="1px" borderRadius="md" p={4}>
             <Stat>
               <StatLabel>{k.label}</StatLabel>
