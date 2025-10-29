@@ -1,6 +1,6 @@
 {
   "name": "read-mind-mirror",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./src/index.tsx",
   "scripts": {
     "test": "exit 0",
